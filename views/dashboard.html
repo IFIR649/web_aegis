@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Smart Panel</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="dark-dashboard-bg">
+  <aside class="sidebar-glass">
+    <div class="sidebar-header">
+      <div class="user-avatar"></div>
+      <div>
+        <div class="user-name">Jane Doe</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      <li><a href="usuarios.html">Usuarios</a></li>
+      <li><a href="dispositivos.html">Dispositivos</a></li>
+      <li><a href="reportes.html">Reportes</a></li>
+      <li><a href="historico.html">Histórico</a></li>
+      <li><a href="configuracion.html">Configuración</a></li>
+      <li><a href="../index.html" style="color:#f87171">Cerrar sesión</a></li>
+    </ul>
+  </aside>
+  <header class="topbar-glass">
+    <div class="brand">admin<span style="color:#facc15">kit</span></div>
+    <div class="topbar-right">
+      <span>settings ⚙️</span>
+      <span class="topbar-avatar"></span>
+    </div>
+  </header>
+  <main class="main-content-glass">
+    <section class="dashboard-section">
+      <h1>Welcome to Dashboard</h1>
+      <div class="dashboard-cards-row">
+        <div class="dashboard-card info">
+          <div class="card-icon" style="background:#2563eb22;color:#2563eb;">⚡</div>
+          <div>
+            <div class="card-title" id="card-consumo">0 kWh</div>
+            <div class="card-desc">Consumo mensual</div>
+          </div>
+        </div>
+        <div class="dashboard-card warning">
+          <div class="card-icon" style="background:#f8717122;color:#f87171;">🚨</div>
+          <div>
+            <div class="card-title" id="card-alertas">0</div>
+            <div class="card-desc">Alertas</div>
+          </div>
+        </div>
+        <div class="dashboard-card success">
+          <div class="card-icon" style="background:#22c55e22;color:#22c55e;">🔌</div>
+          <div>
+            <div class="card-title" id="card-activos">0</div>
+            <div class="card-desc">Dispositivos activos</div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-charts-row">
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Consumo mensual (kWh)</div>
+          <canvas id="barChart" width="340" height="150"></canvas>
+          <div class="chart-footer">Smart Plug<br><span>Consumo por mes</span></div>
+        </div>
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Consumo diario esta semana</div>
+          <canvas id="lineChart" width="340" height="150"></canvas>
+          <div class="chart-footer">Smart Plug<br><span>Consumo diario</span></div>
+        </div>
+      </div>
+      <div class="dashboard-table">
+        <h2>Histórico de Consumo</h2>
+        <input
+          type="text"
+          id="table-search"
+          placeholder="Buscar por usuario, dispositivo, fecha..."
+          style="margin-bottom: 1.2rem; padding: 0.5rem 1rem; border-radius: 8px; border: none; width: 100%; max-width: 350px; background: var(--color-secondary); color: var(--color-text); font-size: 1rem;"
+        >
+        <table id="main-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Dispositivo</th>
+              <th>Usuario</th>
+              <th>Consumo (kWh)</th>
+              <th>Costo estimado</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- El JS llenará aquí las filas -->
+          </tbody>
+        </table>
+        <div id="table-pagination" style="margin-top: 1.2rem; display: flex; gap: 0.5rem; align-items: center;"></div>
+      </div>
+    </section>
+  </main>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

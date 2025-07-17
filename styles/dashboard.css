@@ -1,0 +1,226 @@
+/* --- ESTILO BASE (igual que ya tienes) --- */
+body.dark-dashboard-bg {
+  background: #181b25;
+  color: #f3f6fc;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.sidebar-glass {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 220px;
+  background: rgba(28, 32, 48, 0.81);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-right: 1.5px solid #2226;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+.sidebar-header {
+  display: flex; align-items: center; gap: 1.05rem;
+  padding: 2.4rem 1.5rem 1.1rem 1.5rem;
+}
+.user-avatar, .topbar-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg,#2563eb,#14b8a6);
+  margin-bottom: 0.15rem;
+  border: 2.5px solid #fff2;
+}
+.user-name { font-size: 1.13rem; font-weight: 600;}
+.user-role { font-size: 0.9rem; color: #ccd6f6a1;}
+.sidebar-glass ul {list-style: none; padding: 0 0.7rem;}
+.sidebar-glass ul li {margin: 0.8rem 0;}
+.sidebar-glass ul li a {
+  display: block; color: #ccd6f6c4;
+  padding: 0.7rem 1.1rem; border-radius: 7px;
+  text-decoration: none; font-weight: 500; letter-spacing: 0.2px;
+  transition: background 0.19s, color 0.19s;
+}
+.sidebar-glass ul li a.active, .sidebar-glass ul li a:hover {
+  background: #2563eb22; color: #fff;
+}
+.topbar-glass {
+  margin-left: 220px;
+  height: 56px;
+  background: rgba(28,32,48,0.78);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex; align-items: center;
+  padding: 0 2rem;
+  border-bottom: 1.5px solid #2226;
+  justify-content: space-between;
+}
+.brand { font-size: 1.19rem; font-weight: 700; letter-spacing: 1.2px; color: #fff; }
+.topbar-right { display: flex; align-items: center; gap: 1.5rem;}
+.topbar-avatar { margin-left: 0.7rem; }
+.main-content-glass {
+  margin-left: 220px;
+  padding: 2.6rem 2rem;
+}
+.dashboard-section h1 {
+  font-size: 1.43rem; color: #fff; margin-bottom: 1.2rem;
+  font-weight: 700; letter-spacing: 0.8px;
+}
+.dashboard-cards-row {
+  display: flex; gap: 1.6rem; margin-bottom: 2.4rem;
+}
+.dashboard-card {
+  background: rgba(34,40,60,0.79);
+  border-radius: 13px; padding: 1.3rem 1.4rem;
+  min-width: 170px;
+  box-shadow: 0 2px 15px #2224;
+  display: flex; align-items: center; gap: 1.1rem;
+}
+.card-icon {
+  width: 46px; height: 46px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.55rem;
+  margin-right: 0.5rem;
+  background: #2563eb11;
+}
+.card-title { font-size: 1.14rem; font-weight: 600; color: #fff;}
+.card-desc { font-size: 0.98rem; color: #f3f6fca9; }
+.dashboard-charts-row {
+  display: flex; gap: 1.6rem; margin-top: 0.7rem;
+}
+.dashboard-chart-card {
+  flex: 1; background: rgba(34,40,60,0.85);
+  border-radius: 13px; padding: 1.2rem 1.2rem 0.8rem 1.2rem;
+  box-shadow: 0 2px 12px #2224;
+  margin-bottom: 1.2rem;
+}
+.chart-title {
+  font-size: 1.09rem; font-weight: 600; color: #fff;
+  margin-bottom: 0.8rem;
+}
+.chart-footer {
+  margin-top: 1.15rem;
+  font-size: 0.93rem;
+  color: #c3ccddc4;
+}
+.dashboard-table {
+  background: rgba(34,40,60,0.87);
+  border-radius: 13px;
+  padding: 1.2rem 1.3rem 1.7rem 1.3rem;
+  margin-top: 2rem;
+  box-shadow: 0 1px 8px #2223;
+}
+.dashboard-table h2 { font-size: 1.07rem; color: #fff; margin-bottom: 0.6rem; font-weight: 600; }
+.dashboard-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+.dashboard-table th, .dashboard-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #23253c;
+  color: #ccd6f6;
+}
+.dashboard-table th {
+  font-size: 1rem;
+  font-weight: 600;
+  background: #23253c4d;
+  color: #fff;
+}
+.dashboard-table tr:last-child td {
+  border-bottom: none;
+}
+.status.ok {
+  color: #16a34a; background: #22c55e22; padding: 0.22em 0.75em; border-radius: 10px; font-size: 0.99em;
+}
+.status.alert {
+  color: #f87171; background: #f871711f; padding: 0.22em 0.75em; border-radius: 10px; font-size: 0.99em;
+}
+/* Paginación general */
+#table-pagination button,
+#usuarios-pagination button {
+  background: rgba(37,99,235,0.14);
+  border: none;
+  color: #ccd6f6;
+  font-size: 1rem;
+  border-radius: 6px;
+  padding: 0.38rem 0.9rem;
+  margin: 0 0.15rem;
+  cursor: pointer;
+  transition: background 0.17s;
+}
+#table-pagination button.active-page-btn,
+#table-pagination button:hover,
+#usuarios-pagination button.active-page-btn,
+#usuarios-pagination button:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* --- ESTILO MEJORADO PARA USUARIOS --- */
+.usuarios-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.btn-add-user {
+  background: linear-gradient(90deg, #2563eb 60%, #3a8ffe 100%);
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  font-weight: 600;
+  padding: 0.7em 1.4em;
+  font-size: 1rem;
+  box-shadow: 0 2px 7px #2563eb29;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn-add-user:hover {
+  background: linear-gradient(90deg, #1745b6 60%, #2563eb 100%);
+}
+.usuarios-table .usuarios-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-bottom: 0.7rem;
+}
+.stat-chip {
+  background: #23253c69;
+  color: #ccd6f6;
+  border-radius: 8px;
+  padding: 0.35em 1em;
+  font-size: 0.99em;
+  font-weight: 500;
+}
+.stat-activos { border-left: 5px solid #16a34a; }
+.stat-suspendidos { border-left: 5px solid #f87171; }
+.input-search {
+  margin-left: auto;
+  background: var(--color-secondary, #23253c);
+  color: var(--color-text, #fff);
+  border-radius: 8px;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 270px;
+}
+#usuarios-table th, #usuarios-table td {
+  vertical-align: middle;
+}
+.user-avatar-table {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg,#2563eb77,#14b8a677);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.16rem; font-weight: 600;
+  margin: 0 auto;
+}
+.rol-chip {
+  background: #2563eb22; color: #2563eb; border-radius: 9px; padding: 0.18em 0.78em;
+  font-size: 0.97em; font-weight: 600;
+}
+.rol-chip.admin { background: #facc1522; color: #facc15; }
+.actions-cell button {
+  border: none; background: none; color: #2563eb; margin: 0 0.28em; cursor: pointer;
+  font-size: 1.12em;
+  transition: color 0.14s;
+}
+.actions-cell button:hover { color: #f87171; }
+#usuarios-table tr:hover { background: #23253c44; }

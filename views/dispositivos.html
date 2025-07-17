@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dispositivos | Smart Panel</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body class="dark-dashboard-bg">
+  <aside class="sidebar-glass">
+    <div class="sidebar-header">
+      <div class="user-avatar"></div>
+      <div>
+        <div class="user-name">Jane Doe</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="usuarios.html">Usuarios</a></li>
+      <li><a href="dispositivos.html" class="active">Dispositivos</a></li>
+      <li><a href="reportes.html">Reportes</a></li>
+      <li><a href="historico.html">Histórico</a></li>
+      <li><a href="configuracion.html">Configuración</a></li>
+      <li><a href="../index.html" style="color:#f87171">Cerrar sesión</a></li>
+    </ul>
+  </aside>
+  <header class="topbar-glass">
+    <div class="brand">admin<span style="color:#facc15">kit</span></div>
+    <div class="topbar-right">
+      <span>settings ⚙️</span>
+      <span class="topbar-avatar"></span>
+    </div>
+  </header>
+  <main class="main-content-glass">
+    <section class="dashboard-section">
+      <div class="dispositivos-header">
+        <h1>Dispositivos</h1>
+        <button id="btn-agregar-dispositivo" class="btn-add-user">+ Agregar dispositivo</button>
+      </div>
+      <div class="dispositivos-table">
+        <div class="dispositivos-stats">
+          <span class="stat-chip stat-activos">🟢 Activos: <b id="disp-activos-count">0</b></span>
+          <span class="stat-chip stat-inactivos">🔴 Inactivos: <b id="disp-inactivos-count">0</b></span>
+          <input
+            type="text"
+            id="dispositivos-search"
+            placeholder="Buscar por nombre, usuario, tipo..."
+            class="input-search"
+          >
+        </div>
+        <table id="dispositivos-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Tipo</th>
+              <th>Usuario</th>
+              <th>Consumo actual (W)</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Se llena por JS -->
+          </tbody>
+        </table>
+        <div id="dispositivos-pagination" style="margin-top:1.2rem; display:flex; gap:0.5rem; align-items:center;"></div>
+      </div>
+    </section>
+  </main>
+  <script src="../js/dispositivos.js"></script>
+</body>
+</html>

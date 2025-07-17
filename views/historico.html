@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico | Smart Panel</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body class="dark-dashboard-bg">
+  <aside class="sidebar-glass">
+    <div class="sidebar-header">
+      <div class="user-avatar"></div>
+      <div>
+        <div class="user-name">Jane Doe</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="usuarios.html">Usuarios</a></li>
+      <li><a href="dispositivos.html">Dispositivos</a></li>
+      <li><a href="reportes.html">Reportes</a></li>
+      <li><a href="historico.html" class="active">Histórico</a></li>
+      <li><a href="configuracion.html">Configuración</a></li>
+      <li><a href="../index.html" style="color:#f87171">Cerrar sesión</a></li>
+    </ul>
+  </aside>
+  <header class="topbar-glass">
+    <div class="brand">admin<span style="color:#facc15">kit</span></div>
+    <div class="topbar-right">
+      <span>settings ⚙️</span>
+      <span class="topbar-avatar"></span>
+    </div>
+  </header>
+  <main class="main-content-glass">
+    <section class="dashboard-section">
+      <div class="historico-header">
+        <h1>Histórico de Consumo</h1>
+        <button id="btn-exportar-historico" class="btn-add-user">⬇️ Exportar CSV</button>
+      </div>
+      <div class="historico-table">
+        <div class="historico-filtros">
+          <input type="text" id="historico-search" placeholder="Buscar por usuario, dispositivo, fecha..." class="input-search">
+        </div>
+        <table id="historico-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Dispositivo</th>
+              <th>Usuario</th>
+              <th>Consumo (kWh)</th>
+              <th>Costo estimado</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Se llena por JS -->
+          </tbody>
+        </table>
+        <div id="historico-pagination" style="margin-top:1.2rem; display:flex; gap:0.5rem; align-items:center;"></div>
+      </div>
+    </section>
+  </main>
+  <script src="../js/historico.js"></script>
+</body>
+</html>
