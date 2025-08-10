@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js";
 
-const API_BASE = "http://127.0.0.1:8000";
+const API_BASE = "/api";
 
 const firebaseConfig = { databaseURL: "https://movil-40fec-default-rtdb.firebaseio.com/" };
 const app = initializeApp(firebaseConfig);
