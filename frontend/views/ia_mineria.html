@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IA + Minería | Smart Panel</title>
+
+  <!-- Estilos base del proyecto -->
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Loaders y contenedores de gráficas */
+    .chart-wrapper {
+      position: relative;
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+    }
+    .loader {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 3px solid rgba(148,163,184,.3);
+      border-top-color: #60a5fa; animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Panel IA — Predicción (estilo pro) */
+    .prediccion-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .pred-card {
+      background: rgba(17, 25, 40, 0.85);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .pred-card h3 {
+      margin: 0 0 12px;
+      color: #facc15;
+      letter-spacing: .2px;
+    }
+    .pred-form, .batch-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+    .pred-form label, .batch-form label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: .92rem;
+      color: #d1d5db;
+    }
+    .pred-form input,
+    .pred-form select,
+    .batch-form input,
+    .batch-form select {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.05);
+      color: #e5e7eb;
+      outline: none;
+      transition: border .15s ease, background .15s ease;
+    }
+    .pred-form input:focus,
+    .pred-form select:focus,
+    .batch-form input:focus {
+      border-color: #60a5fa;
+      background: rgba(255,255,255,0.08);
+    }
+    .check-row {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #cbd5e1;
+      margin-top: 2px;
+    }
+    .btn-predict {
+      grid-column: 1 / -1;
+      justify-self: start;
+      margin-top: 4px;
+      padding: 10px 14px;
+      background: linear-gradient(90deg, #2563eb, #3b82f6);
+      border: none;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: .2px;
+      transition: transform .15s ease, opacity .15s ease;
+    }
+    .btn-predict:hover { transform: translateY(-1px); opacity: .95; }
+    .pred-output {
+      margin-top: 12px;
+      background: #0b1220;
+      color: #a7f3d0;
+      padding: 10px;
+      border-radius: 8px;
+      max-height: 260px;
+      overflow-y: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .86rem;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .prediccion-grid { grid-template-columns: 1fr; }
+      .pred-form, .batch-form { grid-template-columns: 1fr; }
+      .btn-predict { width: 100%; }
+    }
+  </style>
+</head>
+
+<body class="dark-dashboard-bg">
+  <aside class="sidebar-glass">
+    <div class="sidebar-header">
+      <div class="user-avatar"></div>
+      <div>
+        <div class="user-name">Jane Doe</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="dispositivos.html">Dispositivos</a></li>
+      <li><a href="historico.html">Histórico</a></li>
+      <li><a href="reportes.html">Reportes</a></li>
+      <li><a href="configuracion.html">Configuración</a></li>
+      <li><a class="active" href="ia_mineria.html">IA + Minería</a></li>
+      <li><a href="../index.html" style="color:#f87171">Cerrar sesión</a></li>
+    </ul>
+  </aside>
+
+  <header class="topbar-glass">
+    <div class="brand">admin<span style="color:#facc15">kit</span></div>
+    <div class="topbar-right">
+      <span>settings ⚙️</span>
+      <span class="topbar-avatar"></span>
+    </div>
+  </header>
+
+  <main class="main-content-glass">
+    <section class="dashboard-section">
+      <h1>IA + Minería</h1>
+
+      <!-- KPIs -->
+      <div class="dashboard-cards-row">
+        <div class="dashboard-card info">
+          <div class="card-icon" style="background:#2563eb22;color:#2563eb;">📊</div>
+          <div>
+            <div class="card-title" id="kpi-registros">0</div>
+            <div class="card-desc">Registros analizados</div>
+          </div>
+        </div>
+        <div class="dashboard-card success">
+          <div class="card-icon" style="background:#22c55e22;color:#22c55e;">🧩</div>
+          <div>
+            <div class="card-title" id="kpi-dispositivos">0</div>
+            <div class="card-desc">Dispositivos únicos</div>
+          </div>
+        </div>
+        <div class="dashboard-card warning">
+          <div class="card-icon" style="background:#f59e0b22;color:#f59e0b;">⚠️</div>
+          <div>
+            <div class="card-title" id="kpi-anomalias">0</div>
+            <div class="card-desc">Anomalías (z-score)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 1 -->
+      <div class="dashboard-charts-row" style="grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px;">
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Distribución por hora</div>
+          <div class="chart-wrapper">
+            <div class="loader" id="loaderHora"></div>
+            <canvas id="chartHora" style="display:none"></canvas>
+          </div>
+        </div>
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Distribución por día</div>
+          <div class="chart-wrapper">
+            <div class="loader" id="loaderDia"></div>
+            <canvas id="chartDia" style="display:none"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 2 -->
+      <div class="dashboard-charts-row" style="grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px;">
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Top municipios por consumo</div>
+          <div class="chart-wrapper">
+            <div class="loader" id="loaderTop"></div>
+            <canvas id="chartTopDispositivos" style="display:none"></canvas>
+          </div>
+        </div>
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Consumo vs Costo</div>
+          <div class="chart-wrapper">
+            <div class="loader" id="loaderScatter"></div>
+            <canvas id="chartConsumoCosto" style="display:none"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 3 -->
+      <div class="dashboard-charts-row" style="grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px;">
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Histograma de consumo</div>
+          <div class="chart-wrapper">
+            <div class="loader" id="loaderHist"></div>
+            <canvas id="chartHistConsumo" style="display:none"></canvas>
+          </div>
+        </div>
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Consumo por hora (acumulado %)</div>
+          <div class="chart-wrapper">
+            <div class="loader" id="loaderHoraAcum"></div>
+            <canvas id="chartHoraAcum" style="display:none"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 4 -->
+      <div class="dashboard-charts-row" style="grid-template-columns: repeat(1,minmax(0,1fr)); gap: 16px;">
+        <div class="dashboard-chart-card">
+          <div class="chart-title">Anomalías (z-score ≥ 3)</div>
+          <div class="chart-wrapper">
+            <div class="loader" id="loaderAnom"></div>
+            <canvas id="chartAnomalias" style="display:none"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- IA Panel -->
+      <section class="dashboard-table">
+        <h2>IA — Predicción</h2>
+
+        <div class="prediccion-grid">
+          <!-- Card Unitario -->
+          <div class="pred-card">
+            <h3>Predicción Unitaria</h3>
+            <form id="form-predict-uno" class="pred-form">
+              <label>Consumo (kWh)
+                <input name="consumo_kwh" type="number" step="0.01" value="5.2" placeholder="Ej. 5.2" required>
+              </label>
+              <label>Consumo Pico
+                <input name="consumo_pico" type="number" step="0.01" value="6.1" required>
+              </label>
+              <label>Promedio por hora
+                <input name="promedio_hora" type="number" step="0.001" value="0.25" required>
+              </label>
+              <label>Costo estimado (MXN)
+                <input name="costo_estimado" type="number" step="0.01" value="15.5" required>
+              </label>
+              <label>Estado
+                <select name="estado">
+                  <option>activo</option><option>inactivo</option>
+                  <option>sin conexión</option><option>suministro cortado</option>
+                </select>
+              </label>
+              <label>Hora del día
+                <input name="hora_dia" type="time" value="14:30" required>
+              </label>
+              <label>Día de la semana
+                <select name="dia_semana">
+                  <option>lunes</option><option>martes</option><option>miércoles</option>
+                  <option>jueves</option><option>viernes</option><option>sábado</option><option>domingo</option>
+                </select>
+              </label>
+              <label>Municipio (casa_id)
+                <select name="casa_id">
+                  <option>Puebla</option><option>Tehuacán</option><option>San Martín Texmelucan</option>
+                  <option>San Pedro Cholula</option><option>San Andrés Cholula</option><option>Atlixco</option>
+                  <option>Cuautlancingo</option><option>Huejotzingo</option><option>Amozoc</option>
+                  <option>Tecamachalco</option><option>Xicotepec</option><option>Zacatlán</option><option>Huauchinango</option>
+                </select>
+              </label>
+              <label class="check-row">
+                <input name="modo_ecologico_activado" type="checkbox"> Modo ecológico activado
+              </label>
+              <button type="submit" class="btn-predict">🔮 Predecir</button>
+            </form>
+            <pre id="uno-output" class="pred-output"></pre>
+          </div>
+
+          <!-- Card Batch -->
+          <div class="pred-card">
+            <h3>Predicción por Lote (Firebase)</h3>
+            <form id="form-predict-batch" class="batch-form">
+              <label>Últimos registros
+                <input name="n" type="number" value="20" min="1" max="200" />
+              </label>
+              <button type="submit" class="btn-predict">📦 Predecir lote</button>
+            </form>
+            <pre id="batch-output" class="pred-output"></pre>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- Importante: sirve esta vista desde la raíz del proyecto (http://127.0.0.1:8000 o http://localhost:8000) -->
+  <!-- AJUSTA ESTA RUTA a tu estructura real; según tu screenshot está en /js/pages/IAMineria.js -->
+  <script src="/pages/IAMineria.js" type="module"></script>
+
+  <script>
+    // Fallback para ocultar loaders si el JS tarda
+    window.addEventListener('mineria:chart-ready', (e) => {
+      const { id } = e.detail || {};
+      const loader = document.getElementById('loader' + id);
+      const canvas = document.getElementById('chart' + id);
+      if (loader && canvas) {
+        loader.style.display = 'none';
+        canvas.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

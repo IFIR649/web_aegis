@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración | Smart Panel</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body class="dark-dashboard-bg">
+  <aside class="sidebar-glass">
+    <div class="sidebar-header">
+      <div class="user-avatar"></div>
+      <div>
+        <div class="user-name">Jane Doe</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="ia_mineria.html">IA + Minería</a></li>
+      <li><a href="usuarios.html">Usuarios</a></li>
+      <li><a href="dispositivos.html">Dispositivos</a></li>
+      <li><a href="reportes.html">Reportes</a></li>
+      <li><a href="historico.html">Histórico</a></li>
+      <li><a href="configuracion.html" class="active">Configuración</a></li>
+      <li><a href="../index.html" style="color:#f87171">Cerrar sesión</a></li>
+    </ul>
+  </aside>
+  <header class="topbar-glass">
+    <div class="brand">admin<span style="color:#facc15">kit</span></div>
+    <div class="topbar-right">
+      <span>settings ⚙️</span>
+      <span class="topbar-avatar"></span>
+    </div>
+  </header>
+  <main class="main-content-glass">
+    <section class="dashboard-section">
+      <h1>Configuración</h1>
+      <div class="config-card">
+        <div class="config-avatar-block">
+          <div class="user-avatar config-avatar"></div>
+          <div>
+            <div class="config-username" id="config-nombre">Jane Doe</div>
+            <div class="config-userrole">Administrador</div>
+          </div>
+        </div>
+        <form id="config-form">
+          <div class="config-field">
+            <label for="config-nombre-input">Nombre</label>
+            <input type="text" id="config-nombre-input" value="Jane Doe">
+          </div>
+          <div class="config-field">
+            <label for="config-email-input">Correo</label>
+            <input type="email" id="config-email-input" value="admin@example.com">
+          </div>
+          <div class="config-field">
+            <label for="config-password-input">Nueva contraseña</label>
+            <input type="password" id="config-password-input" placeholder="••••••••">
+          </div>
+          <div class="config-field">
+            <label for="config-theme">Tema</label>
+            <select id="config-theme">
+              <option value="dark" selected>Oscuro</option>
+              <option value="light">Claro</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-save-config">Guardar cambios</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="../js/configuracion.js"></script>
+</body>
+</html>

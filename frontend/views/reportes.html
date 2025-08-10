@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reportes | Smart Panel</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body class="dark-dashboard-bg">
+  <aside class="sidebar-glass">
+    <div class="sidebar-header">
+      <div class="user-avatar"></div>
+      <div>
+        <div class="user-name">Jane Doe</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="usuarios.html">Usuarios</a></li>
+      <li><a href="dispositivos.html">Dispositivos</a></li>
+      <li><a href="reportes.html" class="active">Reportes</a></li>
+      <li><a href="historico.html">Histórico</a></li>
+      <li><a href="configuracion.html">Configuración</a></li>
+      <li><a href="../index.html" style="color:#f87171">Cerrar sesión</a></li>
+    </ul>
+  </aside>
+
+  <header class="topbar-glass">
+    <div class="brand">admin<span style="color:#facc15">kit</span></div>
+    <div class="topbar-right">
+      <span>settings ⚙️</span>
+      <span class="topbar-avatar"></span>
+    </div>
+  </header>
+
+  <main class="main-content-glass">
+    <section class="dashboard-section">
+      <div class="reportes-header">
+        <h1>Reportes</h1>
+        <button id="btn-generar-reporte" class="btn-add-user">+ Generar reporte</button>
+      </div>
+
+      <div class="reportes-table">
+        <div class="reportes-stats">
+          <span class="stat-chip">Total reportes: <b id="reportes-count">0</b></span>
+          <input
+            type="text"
+            id="reportes-search"
+            placeholder="Buscar por tipo, usuario, fecha..."
+            class="input-search"
+          >
+        </div>
+
+        <table id="reportes-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th>Usuario</th>
+              <th>Formato</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody><!-- se llena por JS --></tbody>
+        </table>
+
+        <div id="reportes-pagination" style="margin-top:1.2rem; display:flex; gap:0.5rem; align-items:center;"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- IMPORTANTE: es módulo porque reportes.js importa Firebase -->
+  <script type="module" src="../js/reportes.js"></script>
+</body>
+</html>

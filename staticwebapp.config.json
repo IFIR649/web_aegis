@@ -1,0 +1,7 @@
+{
+  "navigationFallback": { "rewrite": "/index.html" },
+  "mimeTypes": { ".json": "application/json" },
+  "routes": [
+    { "route": "/api/*", "allowedRoles": [ "anonymous" ] }
+  ]
+}
